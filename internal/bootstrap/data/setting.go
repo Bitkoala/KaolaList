@@ -229,6 +229,14 @@ func InitialSettings() []model.SettingItem {
 		{Key: conf.HandleHookAfterWriting, Value: "false", Type: conf.TypeBool, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.HandleHookRateLimit, Value: "0", Type: conf.TypeNumber, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.IgnoreSystemFiles, Value: "false", Type: conf.TypeBool, Group: model.GLOBAL, Flag: model.PRIVATE, Help: `When enabled, ignores common system files during upload (.DS_Store, desktop.ini, Thumbs.db, and files starting with ._)`},
+		{Key: conf.AiGeminiEndpoint, Value: "https://generativelanguage.googleapis.com", Type: conf.TypeString, Group: model.GLOBAL},
+		{Key: conf.AiGeminiKeys, Value: "", Type: conf.TypeText, Group: model.GLOBAL, Help: "One key per line for polling"},
+		{Key: conf.AiDoubaoEndpoint, Value: "https://ark.cn-beijing.volces.com/api/v3", Type: conf.TypeString, Group: model.GLOBAL},
+		{Key: conf.AiDoubaoKeys, Value: "", Type: conf.TypeText, Group: model.GLOBAL, Help: "One key per line for polling"},
+		{Key: conf.AiDoubaoModel, Value: "doubao-pro-4k", Type: conf.TypeString, Group: model.GLOBAL},
+		{Key: conf.AiFeatureTranslation, Value: "Doubao", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL},
+		{Key: conf.AiFeatureSummary, Value: "Gemini", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL},
+		{Key: conf.AiFeatureOcrPlus, Value: "Cooperation", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL},
 
 		// single settings
 		{Key: conf.Token, Value: token, Type: conf.TypeString, Group: model.SINGLE, Flag: model.PRIVATE},

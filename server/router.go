@@ -101,6 +101,7 @@ func Init(e *gin.Engine) {
 	public.Any("/settings", handles.PublicSettings)
 	public.Any("/offline_download_tools", handles.OfflineDownloadTools)
 	public.Any("/archive_extensions", handles.ArchiveExtensions)
+	public.POST("/ai", handles.AiProcess)
 
 	_fs(auth.Group("/fs"))
 	fsAndShare(api.Group("/fs", middlewares.Auth(true)))

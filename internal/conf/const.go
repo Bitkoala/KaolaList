@@ -60,6 +60,14 @@ const (
 	HandleHookAfterWriting  = "handle_hook_after_writing"
 	HandleHookRateLimit     = "handle_hook_rate_limit"
 	IgnoreSystemFiles       = "ignore_system_files"
+	AiGeminiEndpoint        = "ai_gemini_endpoint"
+	AiGeminiKeys            = "ai_gemini_keys"
+	AiDoubaoEndpoint        = "ai_doubao_endpoint"
+	AiDoubaoKeys            = "ai_doubao_keys"
+	AiDoubaoModel           = "ai_doubao_model"
+	AiFeatureTranslation    = "ai_feature_translation"
+	AiFeatureSummary        = "ai_feature_summary"
+	AiFeatureOcrPlus        = "ai_feature_ocr_plus"
 
 	// index
 	SearchIndex     = "search_index"
