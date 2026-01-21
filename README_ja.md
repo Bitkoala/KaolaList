@@ -126,6 +126,23 @@ KaolaList は、OpenList の強力な基盤の上に、以下のハイエンド�
 - [x] オフラインダウンロード
 - [x] ストレージ間のファイルコピー
 - [x] 単一ファイルのマルチスレッドダウンロード/ストリーム加速
+- [x] **自動バックアップ**: GitHub から Gitee へのリアルタイムプロジェクトミラーリング。
+
+## 🚀 クイックスタート
+
+### Docker デプロイ (推奨)
+マルチアーキテクチャ (amd64/arm64) をサポートする公式イメージの使用を推奨します：
+```bash
+# Docker Hub 公式イメージ
+docker pull canghaix/kaolalist:latest
+
+# GitHub Container Registry (GHCR) バックアップ
+docker pull ghcr.io/bitkoala/kaolalist-git:latest
+```
+
+### グローバルミラー
+GitHub へのアクセスが制限されている地域（中国など）のユーザーは、Gitee ミラーをご利用ください：
+🔗 **Gitee リポジトリ**: [https://gitee.com/bitekaola/KaolaList](https://gitee.com/bitekaola/KaolaList)
 
 ## ドキュメント
 

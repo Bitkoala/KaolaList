@@ -36,6 +36,23 @@ KaolaList 在继承 OpenList 强大功能的基础上，深度集成了以下高
 - [x] **一键部署**: 提供 `kaolalist_deploy.sh` 脚本及 Docker 镜像，快速上线。
 - [x] **深度编辑器定制**: 深度优化的 Monaco Editor / Markdown 实时预览。
 - [x] **离线下载**: 支持磁力、BT 转存。
+- [x] **全自动备份**: 核心项目 GitHub -> Gitee 实时同步。
+
+## 🚀 快速开始
+
+### Docker 部署 (推荐)
+我们建议使用以下镜像，支持多架构 (amd64/arm64)：
+```bash
+# Docker Hub 官方镜像
+docker pull canghaix/kaolalist:latest
+
+# GitHub Container Registry (GHCR) 备份镜像
+docker pull ghcr.io/bitkoala/kaolalist-git:latest
+```
+
+### 国内加速与镜像
+如果您在中国大陆访问 GitHub 或 Docker Hub 较慢，可以使用我们的 Gitee 镜像：
+🔗 **Gitee 仓库**: [https://gitee.com/bitekaola/KaolaList](https://gitee.com/bitekaola/KaolaList)
 
 ## 许可证与合规
 

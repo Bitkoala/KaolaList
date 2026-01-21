@@ -36,6 +36,23 @@ KaolaList integreert de volgende geavanceerde functies bovenop de robuuste basis
 - [x] **Implementatie met één klik**: Geleverd met `kaolalist_deploy.sh` script en Docker-images voor snelle installatie.
 - [x] **Geavanceerde Editor**: Diepgaand aangepaste Monaco Editor en real-time Markdown-voorbeeld.
 - [x] **Offline Download**: Ondersteuning voor Magnets en BT-overdrachten.
+- [x] **Automatische Back-up**: Real-time GitHub naar Gitee project mirroring.
+
+## 🚀 Snel aan de slag
+
+### Docker Implementatie (Aanbevolen)
+We raden aan om onze officiële images te gebruiken, die multi-arch (amd64/arm64) ondersteunen:
+```bash
+# Officiële Image op Docker Hub
+docker pull canghaix/kaolalist:latest
+
+# GitHub Container Registry (GHCR) Back-up
+docker pull ghcr.io/bitkoala/kaolalist-git:latest
+```
+
+### Wereldwijde Mirrors
+Voor gebruikers in regio's met beperkte toegang tot GitHub, gebruik onze Gitee mirror:
+🔗 **Gitee Repository**: [https://gitee.com/bitekaola/KaolaList](https://gitee.com/bitekaola/KaolaList)
 
 ## Licentie & Naleving
 
