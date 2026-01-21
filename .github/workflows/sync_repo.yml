@@ -13,7 +13,7 @@ jobs:
         uses: Yikun/gitee-mirror-action@master
         with:
           src: github/bitkoala
-          dst: gitee/KaolaList
+          dst: gitee/bitekaola
           static_list: "KaolaList"
           dst_key: ${{ secrets.GITEE_SSH_PRIVATE_KEY }}
           dst_token: ${{ secrets.GITEE_TOKEN }}
