@@ -15,16 +15,31 @@ func GetProvider(name string) Provider {
 	model := ""
 
 	if name == "Gemini" {
-		endpoint = op.GetSettingItemByKey(conf.AiGeminiEndpoint)
-		keys = op.GetSettingItemByKey(conf.AiGeminiKeys)
+		item, _ := op.GetSettingItemByKey(conf.AiGeminiEndpoint)
+		if item != nil {
+			endpoint = item.Value
+		}
+		item, _ = op.GetSettingItemByKey(conf.AiGeminiKeys)
+		if item != nil {
+			keys = item.Value
+		}
 		return &GeminiProvider{
 			Endpoint: endpoint,
 			Keys:     parseKeys(keys),
 		}
 	} else if name == "Doubao" {
-		endpoint = op.GetSettingItemByKey(conf.AiDoubaoEndpoint)
-		keys = op.GetSettingItemByKey(conf.AiDoubaoKeys)
-		model = op.GetSettingItemByKey(conf.AiDoubaoModel)
+		item, _ := op.GetSettingItemByKey(conf.AiDoubaoEndpoint)
+		if item != nil {
+			endpoint = item.Value
+		}
+		item, _ = op.GetSettingItemByKey(conf.AiDoubaoKeys)
+		if item != nil {
+			keys = item.Value
+		}
+		item, _ = op.GetSettingItemByKey(conf.AiDoubaoModel)
+		if item != nil {
+			model = item.Value
+		}
 		return &DoubaoProvider{
 			Endpoint: endpoint,
 			Keys:     parseKeys(keys),

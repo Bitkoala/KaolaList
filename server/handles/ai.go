@@ -34,7 +34,11 @@ func AiProcess(c *gin.Context) {
 		featureSetting = conf.AiFeatureOcrPlus
 	}
 
-	mode := op.GetSettingItemByKey(featureSetting)
+	item, _ := op.GetSettingItemByKey(featureSetting)
+	mode := ""
+	if item != nil {
+		mode = item.Value
+	}
 	var resp ai.Response
 
 	if mode == "Cooperation" {
