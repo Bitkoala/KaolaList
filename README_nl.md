@@ -12,6 +12,10 @@
 
 ---
 
+[English](./README.md) | [中文](./README_cn.md) | [日本語](./README_ja.md) | Dutch
+
+---
+
 ## 🐨 Kaola-serie Kernfuncties (Geavanceerd)
 
 KaolaList integreert de volgende geavanceerde functies bovenop de robuuste basis van OpenList:

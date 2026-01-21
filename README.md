@@ -12,6 +12,10 @@
 
 ---
 
+English | [中文](./README_cn.md) | [日本語](./README_ja.md) | [Dutch](./README_nl.md)
+
+---
+
 ## 🐨 Kaola Series Core Features (Advanced)
 
 KaolaList integrates the following high-end features on top of the robust OpenList foundation:

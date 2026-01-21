@@ -12,6 +12,10 @@
 
 ---
 
+[English](./README.md) | 中文 | [日本語](./README_ja.md) | [Dutch](./README_nl.md)
+
+---
+
 ## 🐨 考拉系列核心特性 (Advanced Features)
 
 KaolaList 在继承 OpenList 强大功能的基础上，深度集成了以下高级特性：
