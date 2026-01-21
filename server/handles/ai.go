@@ -46,7 +46,7 @@ func AiProcess(c *gin.Context) {
 	} else {
 		provider := ai.GetProvider(mode)
 		if provider == nil {
-			common.ErrorMsg(c, "AI provider not configured", http.StatusInternalServerError)
+			common.ErrorStrResp(c, "AI provider not configured", http.StatusInternalServerError)
 			return
 		}
 
