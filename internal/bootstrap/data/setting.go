@@ -152,7 +152,7 @@ func InitialSettings() []model.SettingItem {
 		//		{Key: conf.PdfViewers, Value: `{
 		//	"pdf.js":"https://openlistteam.github.io/pdf.js/web/viewer.html?file=$url"
 		//}`, Type: conf.TypeText, Group: model.PREVIEW},
-		{Key: "audio_cover", Value: "https://res.oplist.org/logo/logo.svg", MigrationValue: "https://cdn.oplist.org/gh/OpenListTeam/Logo@main/logo.svg", Type: conf.TypeString, Group: model.PREVIEW},
+		{Key: "audio_cover", Value: "https://jsd.cdn.zzko.cn/gh/AlistGo/alist-web@master/public/logo.svg", MigrationValue: "https://cdn.oplist.org/gh/OpenListTeam/Logo@main/logo.svg", Type: conf.TypeString, Group: model.PREVIEW},
 		{Key: conf.AudioAutoplay, Value: "true", Type: conf.TypeBool, Group: model.PREVIEW},
 		{Key: conf.VideoAutoplay, Value: "true", Type: conf.TypeBool, Group: model.PREVIEW},
 		{Key: conf.PreviewDownloadByDefault, Value: "false", Type: conf.TypeBool, Group: model.PREVIEW},
@@ -167,43 +167,47 @@ func InitialSettings() []model.SettingItem {
 		{Key: "package_download", Value: "true", Type: conf.TypeBool, Group: model.GLOBAL},
 		{Key: conf.CustomizeHead, Value: `
 <style>
-/* KaolaList Premium Theme */
+/* KaolaList Ultimate Premium Theme */
 :root {
   --hope-colors-primary9: #68D391 !important;
   --hope-colors-primary10: #48BB78 !important;
 }
 
-/* Global Glassmorphism */
-.hope-ui-light {
-  --hope-colors-background: rgba(247, 250, 252, 0.7) !important;
-}
-.hope-ui-dark {
-  --hope-colors-background: rgba(23, 25, 35, 0.7) !important;
-}
-
-/* Background Fix for Login Page */
-#root, body {
+/* Global Background Override - Targeting everything */
+html, body, #root, [class*="hope-ui-"] {
   background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+  background-color: transparent !important;
   background-attachment: fixed !important;
   background-size: cover !important;
 }
 
-/* Login Box / Modals Glass Effect */
-.hope-center, .hope-modal__content, aside, main {
-  backdrop-filter: blur(15px) !important;
-  -webkit-backdrop-filter: blur(15px) !important;
-  background-color: var(--hope-colors-background) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 12px !important;
+/* Hide default Alist blobs/patterns if any */
+body::before, body::after, [class*="hope-stack"]::before {
+  display: none !important;
 }
 
-/* Interactive Elements */
-.hope-button, .hope-breadcrumb__list-item {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+/* Glassmorphism for Login Card & UI Elements */
+.hope-center, .hope-modal__content, aside, main, .hope-stack.hope-center > div {
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+  border-radius: 16px !important;
+}
+
+.hope-ui-dark .hope-center, .hope-ui-dark .hope-modal__content, .hope-ui-dark aside, .hope-ui-dark main {
+  background-color: rgba(23, 25, 35, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Interactive Polish */
+.hope-button {
+  border-radius: 10px !important;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
 }
 .hope-button:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(104, 211, 145, 0.3) !important;
+  transform: scale(1.03) translateY(-1px) !important;
 }
 </style>
 `, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
@@ -229,14 +233,14 @@ func InitialSettings() []model.SettingItem {
 		{Key: conf.HandleHookAfterWriting, Value: "false", Type: conf.TypeBool, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.HandleHookRateLimit, Value: "0", Type: conf.TypeNumber, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.IgnoreSystemFiles, Value: "false", Type: conf.TypeBool, Group: model.GLOBAL, Flag: model.PRIVATE, Help: `When enabled, ignores common system files during upload (.DS_Store, desktop.ini, Thumbs.db, and files starting with ._)`},
-		{Key: conf.AiGeminiEndpoint, Value: "https://generativelanguage.googleapis.com", Type: conf.TypeString, Group: model.GLOBAL},
-		{Key: conf.AiGeminiKeys, Value: "", Type: conf.TypeText, Group: model.GLOBAL, Help: "One key per line for polling"},
-		{Key: conf.AiDoubaoEndpoint, Value: "https://ark.cn-beijing.volces.com/api/v3", Type: conf.TypeString, Group: model.GLOBAL},
-		{Key: conf.AiDoubaoKeys, Value: "", Type: conf.TypeText, Group: model.GLOBAL, Help: "One key per line for polling"},
-		{Key: conf.AiDoubaoModel, Value: "doubao-pro-4k", Type: conf.TypeString, Group: model.GLOBAL},
-		{Key: conf.AiFeatureTranslation, Value: "Doubao", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL},
-		{Key: conf.AiFeatureSummary, Value: "Gemini", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL},
-		{Key: conf.AiFeatureOcrPlus, Value: "Cooperation", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL},
+		{Key: conf.AiGeminiEndpoint, Value: "https://generativelanguage.googleapis.com", Type: conf.TypeString, Group: model.GLOBAL, Help: "Gemini API 终点，支持自定义代理"},
+		{Key: conf.AiGeminiKeys, Value: "", Type: conf.TypeText, Group: model.GLOBAL, Help: "Gemini API Key，一行一个，支持自动轮询"},
+		{Key: conf.AiDoubaoEndpoint, Value: "https://ark.cn-beijing.volces.com/api/v3", Type: conf.TypeString, Group: model.GLOBAL, Help: "豆包 API 终点，默认使用火山方舟"},
+		{Key: conf.AiDoubaoKeys, Value: "", Type: conf.TypeText, Group: model.GLOBAL, Help: "豆包 API Key，一行一个，支持自动轮询"},
+		{Key: conf.AiDoubaoModel, Value: "doubao-pro-4k", Type: conf.TypeString, Group: model.GLOBAL, Help: "指定调用的模型 ID"},
+		{Key: conf.AiFeatureTranslation, Value: "Doubao", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL, Help: "翻译功能使用的模型"},
+		{Key: conf.AiFeatureSummary, Value: "Gemini", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL, Help: "摘要功能使用的模型"},
+		{Key: conf.AiFeatureOcrPlus, Value: "Cooperation", Type: conf.TypeSelect, Options: "Gemini,Doubao,Cooperation", Group: model.GLOBAL, Help: "识图增强使用的模式"},
 
 		// single settings
 		{Key: conf.Token, Value: token, Type: conf.TypeString, Group: model.SINGLE, Flag: model.PRIVATE},

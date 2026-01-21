@@ -51,7 +51,7 @@ func initStatic() {
 
 func replaceStrings(content string, replacements map[string]string) string {
 	for old, new := range replacements {
-		content = strings.Replace(content, old, new, 1)
+		content = strings.Replace(content, old, new, -1)
 	}
 	return content
 }
@@ -98,9 +98,10 @@ func initIndex(siteConfig SiteConfig) {
 		manifestPath = siteConfig.BasePath + "/manifest.json"
 	}
 	replaceMap := map[string]string{
-		"cdn: undefined":                    fmt.Sprintf("cdn: '%s'", siteConfig.Cdn),
-		"base_path: undefined":              fmt.Sprintf("base_path: '%s'", siteConfig.BasePath),
-		`href="/manifest.json"`:             fmt.Sprintf(`href="%s"`, manifestPath),
+		"cdn: undefined":        fmt.Sprintf("cdn: '%s'", siteConfig.Cdn),
+		"base_path: undefined":  fmt.Sprintf("base_path: '%s'", siteConfig.BasePath),
+		`href="/manifest.json"`: fmt.Sprintf(`href="%s"`, manifestPath),
+		"lang: undefined":       "lang: 'zh-CN'",
 	}
 	conf.RawIndexHtml = replaceStrings(conf.RawIndexHtml, replaceMap)
 	UpdateIndex()
@@ -116,10 +117,55 @@ func UpdateIndex() {
 	mainColor := setting.GetStr(conf.MainColor)
 	utils.Log.Debug("Applying replacements for default pages...")
 	replaceMap1 := map[string]string{
-		"https://res.oplist.org/logo/logo.svg": favicon,
-		"https://res.oplist.org/logo/logo.png": logo,
-		"Loading...":                           title,
-		"main_color: undefined":                fmt.Sprintf("main_color: '%s'", mainColor),
+		"https://res.oplist.org/logo/logo.svg":     favicon,
+		"https://res.oplist.org/logo/logo.png":     logo,
+		"Loading...":                               title,
+		"main_color: undefined":                    fmt.Sprintf("main_color: '%s'", mainColor),
+		"OpenList":                                 "KaolaList",
+		"AList":                                    "KaolaList",
+		"由 OpenList 驱动":                            "由 KaolaList 驱动",
+		"Powered by OpenList":                      "Powered by KaolaList",
+		"OpenList 管理":                              "KaolaList 管理",
+		"管理 OpenList":                              "管理 KaolaList",
+		"https://openlist.team":                    "https://bitekaola.com",
+		"https://docs.openlist.team":               "https://bitekaola.com",
+		"https://github.com/OpenListTeam/OpenList": "https://gitee.com/bitekaola/KaolaList",
+		"OpenList 官方文档":                            "KaolaList 官方文档",
+		"OpenList 讨论区":                             "KaolaList 社区",
+		"Management":                               "管理后台",
+		"Settings center":                          "设置中心",
+		"Settings":                                 "功能设置",
+		"Storage":                                  "存储管理",
+		"User":                                     "用户管理",
+		"Profile":                                  "个人中心",
+		"Logout":                                   "安全退出",
+		"Back to home":                             "返回首页",
+		"Guest":                                    "游客",
+		"Search":                                   "搜索",
+		"Download":                                 "下载",
+		"Details":                                  "详情",
+		"Login to":                                 "登录到",
+		"Copy":                                     "复制",
+		"Move":                                     "移动",
+		"Rename":                                   "重命名",
+		"Delete":                                   "删除",
+		"New Folder":                               "新建文件夹",
+		"Upload":                                   "上传",
+		"Refresh":                                  "刷新",
+		"AI Features":                              "考拉大脑 AI",
+		"AI Gemini Key":                            "Gemini 密钥",
+		"AI Doubao Key":                            "豆包密钥",
+		"AI Feature Settings":                      "AI 功能分发",
+		"Ai gemini endpoint":                       "Gemini API 终点",
+		"Ai gemini keys":                           "Gemini API 密钥",
+		"Ai gemini keys-tips":                      "一行一个密钥，支持自动轮询",
+		"Ai doubao endpoint":                       "豆包 API 终点",
+		"Ai doubao keys":                           "豆包 API 密钥",
+		"Ai doubao keys-tips":                      "多 Key 轮询，支持识图",
+		"Ai doubao model":                          "豆包模型 ID",
+		"Ai feature translation":                   "翻译引擎分配",
+		"Ai feature summary":                       "摘要引擎分配",
+		"Ai feature ocr plus":                      "识图增强模式",
 	}
 	conf.ManageHtml = replaceStrings(conf.RawIndexHtml, replaceMap1)
 	utils.Log.Debug("Applying replacements for manage pages...")
@@ -134,10 +180,10 @@ func UpdateIndex() {
 func ManifestJSON(c *gin.Context) {
 	// Get site configuration to ensure consistent base path handling
 	siteConfig := getSiteConfig()
-	
+
 	// Get site title from settings
 	siteTitle := setting.GetStr(conf.SiteTitle)
-	
+
 	// Get logo from settings, use the first line (light theme logo)
 	logoSetting := setting.GetStr(conf.Logo)
 	logoUrl := strings.Split(logoSetting, "\n")[0]
@@ -167,7 +213,7 @@ func ManifestJSON(c *gin.Context) {
 
 	c.Header("Content-Type", "application/json")
 	c.Header("Cache-Control", "public, max-age=3600") // cache for 1 hour
-	
+
 	if err := json.NewEncoder(c.Writer).Encode(manifest); err != nil {
 		utils.Log.Errorf("Failed to encode manifest.json: %v", err)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate manifest"})
@@ -181,7 +227,7 @@ func Static(r *gin.RouterGroup, noRoute func(handlers ...gin.HandlerFunc)) {
 	initStatic()
 	initIndex(siteConfig)
 	folders := []string{"assets", "images", "streamer", "static"}
-	
+
 	if conf.Conf.Cdn == "" {
 		utils.Log.Debug("Setting up static file serving...")
 		r.Use(func(c *gin.Context) {
