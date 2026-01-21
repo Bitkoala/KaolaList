@@ -15,7 +15,7 @@ concurrency:
 
 env:
   DOCKERHUB_ORG_NAME: canghaix
-  GHCR_ORG_NAME: canghaix
+  GHCR_ORG_NAME: ${{ github.repository_owner }}
   IMAGE_NAME: kaolalist-git
   IMAGE_NAME_DOCKERHUB: kaolalist
   REGISTRY: ghcr.io
