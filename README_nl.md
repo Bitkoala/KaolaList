@@ -1,5 +1,5 @@
 <div align="center">
-  <img style="width: 128px; height: 128px;" src="https://raw.githubusercontent.com/KaolaList/Branding/main/logo.svg" alt="logo" />
+  <img style="width: 128px; height: 128px;" src="https://jsd.cdn.zzko.cn/gh/AlistGo/alist-web@master/public/logo.svg" alt="logo" />
 
   <h1>KaolaList</h1>
   <p><em>Premium Persoonlijk Cloudportaal | Hoogwaardige Netdisk Gateway</em></p>

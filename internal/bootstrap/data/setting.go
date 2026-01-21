@@ -114,8 +114,8 @@ func InitialSettings() []model.SettingItem {
 		{Key: conf.AllowMounted, Value: "true", Type: conf.TypeBool, Group: model.SITE},
 		{Key: conf.RobotsTxt, Value: "User-agent: *\nAllow: /", Type: conf.TypeText, Group: model.SITE},
 		// style settings
-		{Key: conf.Logo, Value: "https://raw.githubusercontent.com/KaolaList/Branding/main/logo.svg", Type: conf.TypeText, Group: model.STYLE},
-		{Key: conf.Favicon, Value: "https://raw.githubusercontent.com/KaolaList/Branding/main/logo.svg", Type: conf.TypeString, Group: model.STYLE},
+		{Key: conf.Logo, Value: "https://jsd.cdn.zzko.cn/gh/AlistGo/alist-web@master/public/logo.svg", Type: conf.TypeText, Group: model.STYLE},
+		{Key: conf.Favicon, Value: "https://jsd.cdn.zzko.cn/gh/AlistGo/alist-web@master/public/logo.svg", Type: conf.TypeString, Group: model.STYLE},
 		{Key: conf.MainColor, Value: "#68D391", Type: conf.TypeString, Group: model.STYLE},
 		{Key: "home_icon", Value: "🏠", Type: conf.TypeString, Group: model.STYLE},
 		{Key: "share_icon", Value: "🎁", Type: conf.TypeString, Group: model.STYLE},
@@ -171,33 +171,41 @@ func InitialSettings() []model.SettingItem {
 :root {
   --hope-colors-primary9: #68D391 !important;
   --hope-colors-primary10: #48BB78 !important;
-  --kaola-grey: #4A5568;
 }
-/* Glassmorphism Effects */
+
+/* Global Glassmorphism */
 .hope-ui-light {
-  --hope-colors-background: rgba(247, 250, 252, 0.8) !important;
+  --hope-colors-background: rgba(247, 250, 252, 0.7) !important;
 }
 .hope-ui-dark {
-  --hope-colors-background: rgba(23, 25, 35, 0.8) !important;
+  --hope-colors-background: rgba(23, 25, 35, 0.7) !important;
 }
-/* Sidebar and Main Content Glass Effect */
-aside, main, .hope-modal__content {
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
+
+/* Background Fix for Login Page */
+#root, body {
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+}
+
+/* Login Box / Modals Glass Effect */
+.hope-center, .hope-modal__content, aside, main {
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
   background-color: var(--hope-colors-background) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
 }
-/* Transitions & Micro-animations */
-* {
-  transition: all 0.2s ease-in-out !important;
+
+/* Interactive Elements */
+.hope-button, .hope-breadcrumb__list-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
-.hope-breadcrumb__list-item, .hope-stack > .hope-button {
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-}
-.hope-breadcrumb__list-item:hover, .hope-stack > .hope-button:hover {
-  transform: scale(1.02);
+.hope-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(104, 211, 145, 0.3) !important;
 }
 </style>
-<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=String.prototype.replaceAll"></script>
 `, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.CustomizeBody, Type: conf.TypeText, Group: model.GLOBAL, Flag: model.PRIVATE},
 		{Key: conf.LinkExpiration, Value: "0", Type: conf.TypeNumber, Group: model.GLOBAL, Flag: model.PRIVATE},
