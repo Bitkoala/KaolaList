@@ -145,27 +145,120 @@ func UpdateIndex() {
 		"Download":                                 "下载",
 		"Details":                                  "详情",
 		"Login to":                                 "登录到",
-		"Copy":                                     "复制",
-		"Move":                                     "移动",
-		"Rename":                                   "重命名",
-		"Delete":                                   "删除",
-		"New Folder":                               "新建文件夹",
-		"Upload":                                   "上传",
-		"Refresh":                                  "刷新",
-		"AI Features":                              "考拉大脑 AI",
-		"AI Gemini Key":                            "Gemini 密钥",
-		"AI Doubao Key":                            "豆包密钥",
-		"AI Feature Settings":                      "AI 功能分发",
-		"Ai gemini endpoint":                       "Gemini API 终点",
-		"Ai gemini keys":                           "Gemini API 密钥",
-		"Ai gemini keys-tips":                      "一行一个密钥，支持自动轮询",
-		"Ai doubao endpoint":                       "豆包 API 终点",
-		"Ai doubao keys":                           "豆包 API 密钥",
-		"Ai doubao keys-tips":                      "多 Key 轮询，支持识图",
-		"Ai doubao model":                          "豆包模型 ID",
-		"Ai feature translation":                   "翻译引擎分配",
-		"Ai feature summary":                       "摘要引擎分配",
-		"Ai feature ocr plus":                      "识图增强模式",
+		"<!-- customize head -->": `<style>
+/* KaolaList Nuclear Premium Theme & Brand Purge */
+:root {
+  --hope-colors-primary9: #68D391 !important;
+  --hope-colors-primary10: #48BB78 !important;
+}
+html, body, #root, [class*="hope-ui-"], [class*="hope-stack"] {
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+  background-color: transparent !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+/* Hide Footer / Branding */
+footer, [class*="footer"], .footer, [class*="hope-stack"] > div > a[href*="github.com/alist-org"], [class*="hope-stack"] > div > a[href*="github.com/OpenListTeam"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+body::before, body::after, [class*="hope-stack"]::before, [class*="hope-stack"]::after {
+  display: none !important;
+}
+.hope-center, .hope-modal__content, aside, main, .hope-stack.hope-center > div {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+  border-radius: 18px !important;
+}
+.hope-ui-dark .hope-center, .hope-ui-dark .hope-modal__content, .hope-ui-dark aside, .hope-ui-dark main {
+  background-color: rgba(23, 25, 35, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+</style>
+<script>
+// 🐨 Kaola Brain - Ultimate UI Brand Purge & Localization Script
+(function() {
+  const trans = {
+    'Ai gemini endpoint': 'Gemini API 终点',
+    'Ai gemini keys': 'Gemini API 密钥',
+    'Ai gemini keys-tips': '一行一个密钥，支持多 Key 轮询',
+    'Ai doubao endpoint': '豆包 API 终点',
+    'Ai doubao keys': '豆包 API 密钥',
+    'Ai doubao keys-tips': '一行一个密钥，支持图片分析',
+    'Ai doubao model': '豆包模型 ID',
+    'Ai feature translation': 'AI 翻译功能引擎',
+    'Ai feature summary': 'AI 摘要功能引擎',
+    'Ai feature ocr plus': 'AI 识图增强模式',
+    'OpenList Management': 'KaolaList 管理后台',
+    'OpenList Manage': 'KaolaList 管理',
+    'OpenList 管理': 'KaolaList 管理',
+    '管理 OpenList': '管理 KaolaList',
+    'OpenList Official Documentation': 'KaolaList 官方文档',
+    'OpenList docs': 'KaolaList 文档',
+    'OpenList discussion': 'KaolaList 社区',
+    'OpenList': 'KaolaList',
+    'AList': 'KaolaList'
+  };
+
+  const purge = () => {
+    // 1. Text Nodes
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    while(node = walker.nextNode()) {
+      let val = node.nodeValue;
+      for (const [eng, chi] of Object.entries(trans)) {
+        if (val.includes(eng)) { val = val.split(eng).join(chi); }
+      }
+      if (val !== node.nodeValue) node.nodeValue = val;
+    }
+    // 2. Document Title
+    for (const [eng, chi] of Object.entries(trans)) {
+      if (document.title.includes(eng)) { document.title = document.title.split(eng).join(chi); }
+    }
+    // 3. Links & Redirection
+    document.querySelectorAll('a').forEach(a => {
+      if (a.href.includes('openlist.team') || a.href.includes('github.com/OpenListTeam')) {
+        a.href = 'https://bitekaola.com';
+        for (const [eng, chi] of Object.entries(trans)) {
+          if (a.innerText.includes(eng)) { a.innerText = a.innerText.split(eng).join(chi); }
+        }
+      }
+    });
+  };
+
+  const observer = new MutationObserver(purge);
+  observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  window.addEventListener('load', purge);
+  purge(); 
+})();
+</script>`,
+		"Copy":                   "复制",
+		"Move":                   "移动",
+		"Rename":                 "重命名",
+		"Delete":                 "删除",
+		"New Folder":             "新建文件夹",
+		"Upload":                 "上传",
+		"Refresh":                "刷新",
+		"AI Features":            "考拉大脑 AI",
+		"AI Gemini Key":          "Gemini 密钥",
+		"AI Doubao Key":          "豆包密钥",
+		"AI Feature Settings":    "AI 功能分发",
+		"Ai gemini endpoint":     "Gemini API 终点",
+		"Ai gemini keys":         "Gemini API 密钥",
+		"Ai gemini keys-tips":    "一行一个密钥，支持自动轮询",
+		"Ai doubao endpoint":     "豆包 API 终点",
+		"Ai doubao keys":         "豆包 API 密钥",
+		"Ai doubao keys-tips":    "多 Key 轮询，支持识图",
+		"Ai doubao model":        "豆包模型 ID",
+		"Ai feature translation": "翻译引擎分配",
+		"Ai feature summary":     "摘要引擎分配",
+		"Ai feature ocr plus":    "识图增强模式",
 	}
 	conf.ManageHtml = replaceStrings(conf.RawIndexHtml, replaceMap1)
 	utils.Log.Debug("Applying replacements for manage pages...")
